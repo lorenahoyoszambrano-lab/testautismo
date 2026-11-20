@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cuestionario de orientación TEA e informe</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Source+Serif+4:wght@600&display=swap">
+<style>
+:root{--bg:#f5f7f8;--card:#fff;--ink:#17252b;--mut:#5a6b73;--line:#d5dde1;--acc:#1f5f6b;--acc2:#e8f1f3;--warn:#a4452c;--wbg:#fbece7;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10181b;--card:#182328;--ink:#e6eef1;--mut:#9fb0b8;--line:#2c3b42;--acc:#6bbac8;--acc2:#1d3138;--warn:#f0a58f;--wbg:#3a211b}}
+*{box-sizing:inherit}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 "Atkinson Hyperlegible",system-ui,sans-serif}
+main{max-width:760px;margin:0 auto;padding:20px 16px 60px}
+h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;font-weight:600;line-height:1.25;margin:0 0 8px}
+h1{font-size:1.8rem}h2{font-size:1.35rem;margin-top:28px}h3{font-size:1.1rem;margin-top:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;margin:14px 0}
+.note{background:var(--wbg);color:var(--ink);border-left:4px solid var(--warn);padding:10px 14px;border-radius:6px;font-size:.95rem;margin:12px 0}
+label.f{display:block;margin:10px 0 4px;font-weight:700;font-size:.95rem}
+input,select,textarea{width:100%;font:inherit;padding:9px 10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--acc);color:var(--bg);border:0;padding:11px 20px;border-radius:6px;font-weight:700}
+.btn.s{background:transparent;color:var(--acc);border:1px solid var(--acc)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin:6px 0 14px}.bar i{display:block;height:100%;background:var(--acc);width:0;transition:width .3s}
+.q{padding:14px 0;border-top:1px solid var(--line)}.q p{margin:0 0 8px}
+.opts{display:flex;gap:6px;flex-wrap:wrap}
+.opts label{flex:1 1 70px;min-width:70px;text-align:center;border:1px solid var(--line);border-radius:6px;padding:7px 4px;font-size:.88rem;cursor:pointer;background:var(--bg)}
+.opts input{position:absolute;opacity:0;width:0}
+.opts label:has(input:checked){background:var(--acc);color:var(--bg);border-color:var(--acc);font-weight:700}
+.opts label:has(input:focus-visible),button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:.93rem}th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line)}
+.pill{display:inline-block;padding:2px 10px;border-radius:12px;background:var(--acc2);font-size:.88rem;font-weight:700}
+.pill.h{background:var(--wbg);color:var(--warn)}
+.cb{display:flex;gap:10px;align-items:flex-start;margin:8px 0}.cb input{width:auto;margin-top:6px}
+.mut{color:var(--mut);font-size:.92rem}
+@media print{body{background:#fff;color:#000}.no{display:none!important}.card{break-inside:avoid;border-color:#999}}
+</style></head><body><main>
+<div id="app"></div>
+</main>
+<script>
+const SC=[[0,"Nunca"],[1,"A veces"],[2,"Frecuente"],[3,"Casi siempre"],["NA","No aplica"]];
+const AREAS=[
+{k:"A",n:"Conversación y lenguaje social",g:"CS",it:["Habla mucho de sus temas favoritos sin notar si el otro se aburre","Le cuesta mantener una conversación de ida y vuelta","Responde, pero casi nunca pregunta sobre usted o sobre otros","Cambia de tema bruscamente o vuelve siempre al mismo","Interrumpe o no sabe cuándo le toca hablar","Tono de voz inusual (monótono, muy alto, cantado, de «adulto pequeño»)","Vocabulario muy formal o «de libro» para su edad","Entiende de forma literal bromas, ironías o frases hechas","Le cuesta contar qué le pasó con orden y detalles relevantes","Cuenta cosas sin dar contexto (no se sabe de quién ni de qué habla)","Usa frases repetidas «de guion» de videos o dibujos en situaciones reales","Le cuesta describir lo que siente o piensa","Usa pocos gestos al hablar, o los usa exagerados o desajustados","No pide aclaración cuando no entiende, o se queda en silencio","Otros niños lo corrigen, se burlan o no lo entienden al hablar"]},
+{k:"B",n:"Interacción social recíproca",g:"CS",it:["Contacto visual escaso, fugaz o demasiado fijo","La mirada no se coordina con la voz, la sonrisa o los gestos","Sus expresiones faciales no coinciden con lo que siente o con la situación","No nota que alguien está triste, enojado o aburrido","Le cuesta entender qué piensa o siente otro (por qué alguien se ofendió)","Dice cosas sinceras que incomodan sin darse cuenta","Comparte poco sus logros o intereses por iniciativa propia","Consuela poco, o lo hace de forma mecánica o fuera de lugar","Prefiere jugar solo o con adultos antes que con niños de su edad","Quiere tener amigos pero no sabe cómo iniciar o mantener la amistad","Tiene pocas amistades, de corta duración o basadas solo en un interés","Se mete en los juegos de otros de forma torpe o invasiva","Impone sus reglas y no cede en los juegos","Le cuesta entender reglas sociales no escritas (distancia, tono, momento)","Es ingenuo, fácil de engañar o de manipular","Se siente solo o rechazado y lo expresa, o lo muestra con tristeza o retraimiento","Confunde juego con agresión, o broma con burla"]},
+{k:"C",n:"Imaginación, juego y creatividad",g:"CS",it:["Su juego de fantasía es repetitivo (copia escenas de videos sin variar)","Le cuesta inventar historias propias, o las inventa siempre con el mismo esquema","Le cuesta jugar con otros a «hacer de cuenta»","Usa los juguetes para ordenarlos o clasificarlos más que para jugar","Sus dibujos o escritos repiten siempre los mismos temas","Prefiere hechos, datos y reglas antes que la fantasía"]},
+{k:"D",n:"Conductas repetitivas e inflexibilidad",g:"CR",it:["Intereses muy intensos o inusuales, con conocimiento casi enciclopédico","Insiste en hablar o hacer solo lo relacionado con su interés","Rutinas o rituales rígidos (ropa, ruta, horarios, comidas)","Se desorganiza mucho ante cambios pequeños o imprevistos","Exige que otros sigan sus reglas o rituales","Movimientos repetitivos (aletear, balancearse, puntillas, girar, sonidos)","Se fija en partes de los objetos o en detalles sensoriales","Pensamiento «blanco o negro», muy rígido con lo correcto e incorrecto","Le cuesta pasar de una actividad que le gusta a otra","Hace preguntas o comentarios repetitivos aunque ya conozca la respuesta"]},
+{k:"E",n:"Particularidades sensoriales",g:"CR",it:["Se altera por ruidos comunes (licuadora, timbres, secadores, recreo)","Rechaza texturas de ropa, etiquetas, costuras o calzado","Alimentación muy selectiva por textura, color, marca o presentación","Busca estímulos intensos (girar, saltar, apretar, chocar)","Huele, lame o toca objetos o personas de forma insistente","Parece no sentir golpes, calor o frío","Se desborda en lugares con mucha gente, luz o ruido"]},
+{k:"F",n:"Emociones, conducta y funcionamiento",g:"DA",it:["Explosiones o crisis intensas ante frustración o cambios","Le cuesta calmarse solo","Ansiedad, preocupaciones o miedos intensos","Tristeza, irritabilidad o desánimo frecuentes","Problemas de atención o impulsividad","Problemas de sueño","Necesita más ayuda que otros de su edad en tareas cotidianas (vestirse, organizarse, higiene)","Rinde por debajo de su capacidad por problemas sociales, de organización o de conducta"]}];
+let n=0;AREAS.forEach(a=>a.it=a.it.map(t=>({t,i:++n})));
+const LV=["sin señales relevantes","señales leves","señales moderadas","señales marcadas"];
+const PR=["baja","baja a media","media","media a alta","alta"];
+const S={step:0,p:{},a:{},al:{}};
+const $=s=>document.querySelector(s),app=$("#app");
+const lvl=p=>p<25?0:p<50?1:p<75?2:3;
+function head(){return `<h1>Cuestionario de orientación del desarrollo</h1><p class="mut">Niño o niña con lenguaje fluido · basado en las áreas de observación del ADOS-2 Módulo 3 y la entrevista ADI-R</p>`}
+function intro(){app.innerHTML=head()+`<div class="note"><b>Esto no es un diagnóstico.</b> Es una herramienta de orientación, no un instrumento validado ni estandarizado. El diagnóstico y el nivel de apoyo solo los establece un equipo especializado con ADOS-2, ADI-R y evaluación clínica. Los datos se calculan en su dispositivo y no se envían a ningún lugar.</div>
+<div class="card"><h3>Datos del niño o niña</h3>
+<label class="f" for="nm">Nombre o iniciales</label><input id="nm" value="${S.p.nm||""}">
+<label class="f" for="ed">Edad (años)</label><input id="ed" type="number" min="3" max="18" value="${S.p.ed||""}">
+<label class="f" for="sx">Sexo</label><select id="sx"><option>Niño</option><option>Niña</option></select>
+<label class="f" for="rs">¿Quién responde?</label><select id="rs"><option>Madre</option><option>Padre</option><option>Docente</option><option>Otro cuidador</option></select>
+<label class="f" for="mo">Motivo de consulta (opcional)</label><textarea id="mo" rows="3">${S.p.mo||""}</textarea>
+<p class="mut">Piense en los últimos 3 meses y en cómo es la mayor parte del tiempo. Son 63 preguntas, unos 15 minutos.</p>
+<div class="nav"><span></span><button class="btn" id="go">Comenzar</button></div></div>`;
+$("#go").onclick=()=>{S.p={nm:$("#nm").value.trim(),ed:$("#ed").value,sx:$("#sx").value,rs:$("#rs").value,mo:$("#mo").value.trim()};S.step=1;render()}}
+function pregs(){const a=AREAS[S.step-1];
+app.innerHTML=head()+`<div class="bar"><i style="width:${(S.step-1)/7*100}%"></i></div><h2>Parte ${S.step} de 7: ${a.n}</h2>
+<p class="mut">0 = nunca · 1 = a veces · 2 = frecuente · 3 = casi siempre. Use «No aplica» solo si la conducta no corresponde a su edad.</p><div class="card" style="padding:4px 18px">`+
+a.it.map(q=>`<div class="q"><p><b>${q.i}.</b> ${q.t}</p><div class="opts" role="radiogroup" aria-label="Pregunta ${q.i}">${SC.map(([v,l])=>`<label><input type="radio" name="q${q.i}" value="${v}" ${S.a[q.i]===v?"checked":""}>${v==="NA"?l:v+" · "+l}</label>`).join("")}</div></div>`).join("")+
+`</div><p class="note no" id="err" hidden>Responda todas las preguntas para continuar.</p><div class="nav"><button class="btn s" id="bk">Atrás</button><button class="btn" id="nx">Siguiente</button></div>`;
+document.querySelectorAll(".opts input").forEach(r=>r.onchange=()=>{S.a[r.name.slice(1)]=r.value==="NA"?"NA":+r.value});
+$("#bk").onclick=()=>{S.step--;render()};
+$("#nx").onclick=()=>{if(a.it.some(q=>S.a[q.i]===undefined)){$("#err").hidden=false;$("#err").scrollIntoView({block:"center"});return}S.step++;render()}}
+const AL=[["perd","Hubo pérdida de lenguaje o de habilidades que ya tenía"],["auto","Se hace daño a sí mismo o agrede a otros con frecuencia"],["des","Ha dicho frases como «quiero desaparecer» o «no quiero vivir»"],["conv","Ha tenido convulsiones o un cambio brusco de conducta"],["esc","Rechaza ir a la escuela o tiene crisis casi diarias"],["mask","Se porta bien afuera (escuela) y explota en casa"],["aud","Su audición y visión nunca se han evaluado"]];
+function extra(){app.innerHTML=head()+`<div class="bar"><i style="width:85%"></i></div><h2>Parte 7 de 7: Señales de alerta e historia</h2><p class="mut">Marque lo que corresponda.</p><div class="card">`+
+AL.map(([k,t])=>`<label class="cb"><input type="checkbox" data-k="${k}" ${S.al[k]?"checked":""}><span>${t}</span></label>`).join("")+
+`<label class="f" for="ob">Otras observaciones para el especialista (opcional)</label><textarea id="ob" rows="3">${S.p.ob||""}</textarea></div>
+<div class="nav"><button class="btn s" id="bk">Atrás</button><button class="btn" id="fin">Generar informe</button></div>`;
+$("#bk").onclick=()=>{S.step--;render()};
+$("#fin").onclick=()=>{document.querySelectorAll("[data-k]").forEach(c=>S.al[c.dataset.k]=c.checked);S.p.ob=$("#ob").value.trim();S.step=8;render()}}
+function calc(){const R={ar:{},tot:{CS:[0,0],CR:[0,0],DA:[0,0]},hi:[]};
+AREAS.forEach(a=>{let s=0,m=0;a.it.forEach(q=>{const v=S.a[q.i];if(v!=="NA"){s+=v;m+=3;if(v===3)R.hi.push(q)}});const p=m?Math.round(s/m*100):0;R.ar[a.k]={s,m,p,l:lvl(p),n:a.n};R.tot[a.g][0]+=s;R.tot[a.g][1]+=m});
+R.ix={};for(const g in R.tot){const[s,m]=R.tot[g],p=m?Math.round(s/m*100):0;R.ix[g]={s,m,p,l:lvl(p)}}
+const gs=k=>S.a[k]==="NA"?0:S.a[k];R.fn=gs(62)+gs(63);R.fl=R.fn>=4?2:R.fn>=2?1:0;
+const cs=R.ix.CS.l,cr=R.ix.CR.l;let p;
+if(cs===3)p=4;else if(cs===2)p=cr>=2?4:2;else if(cs===1)p=cr===3?3:cr===2?2:1;else p=cr===3?2:cr===2?1:0;
+R.p0=p;if(R.fl===2)p=Math.min(4,p+1);R.pr=p;
+R.al=[];if(S.al.perd)R.al.push("Pérdida de lenguaje o habilidades");if(S.al.auto)R.al.push("Autoagresión o agresiones frecuentes");if(S.al.des||gs(31)>=2&&gs(59)>=2)R.al.push("Indicadores de malestar emocional importante o ideas de desaparecer");if(S.al.conv)R.al.push("Convulsiones o cambio brusco de conducta");if(S.al.esc)R.al.push("Rechazo escolar o crisis casi diarias");
+R.urg=S.al.perd||S.al.auto||S.al.des||S.al.conv;R.mask=S.al.mask||S.al.aud;return R}
+const TX={A:["La comunicación conversacional se describe sin dificultades llamativas.","Se observan dificultades ocasionales en la reciprocidad conversacional y el uso social del lenguaje.","El perfil sugiere dificultades pragmáticas consistentes: reciprocidad limitada, discurso centrado en intereses propios y comprensión literal.","El perfil sugiere dificultades pragmáticas marcadas y generalizadas que afectan de forma importante el intercambio comunicativo."],
+B:["La reciprocidad social se describe dentro de lo esperable.","Hay algunas dificultades en la lectura de señales sociales y en la iniciativa de interacción.","Se describen dificultades sostenidas en reciprocidad socioemocional, comprensión de la perspectiva ajena y mantenimiento de amistades.","Se describen dificultades marcadas en reciprocidad socioemocional, conducta no verbal y relaciones con iguales."],
+C:["El juego y la imaginación se describen con variedad y flexibilidad.","El juego imaginativo muestra cierta rigidez o repetición.","Se observa un juego imaginativo restringido, con tendencia a repetir esquemas conocidos.","Se observa una restricción marcada de la imaginación y del juego flexible o compartido."],
+D:["No se describen rigideces ni intereses restringidos llamativos.","Hay cierta preferencia por rutinas e intereses intensos, con flexibilidad conservada en general.","Se describen intereses intensos, rutinas rígidas y dificultad con los cambios que interfieren con la vida cotidiana.","Se describen conductas repetitivas, rituales e inflexibilidad marcados que condicionan el funcionamiento diario."],
+E:["No se describen particularidades sensoriales relevantes.","Hay sensibilidades sensoriales puntuales.","Se describen particularidades sensoriales que influyen en la alimentación, la vestimenta o la tolerancia a entornos.","Se describen particularidades sensoriales marcadas que limitan la participación en distintos contextos."],
+F:["No se describen dificultades emocionales o conductuales relevantes.","Hay algunas dificultades de regulación emocional o conducta.","Se describen dificultades de regulación emocional, ansiedad o conducta, con necesidad de apoyo adicional.","Se describen dificultades emocionales y conductuales marcadas, con alto impacto en el funcionamiento."]};
+const REC=[["Repetir el cuestionario en 6 meses y comentar los resultados en el próximo control pediátrico."],["Solicitar al pediatra una valoración del desarrollo y del lenguaje (incluido el pragmático)."],["Solicitar valoración del desarrollo con un especialista y complementar con información escolar."],["Pedir evaluación especializada completa pronto: ADOS-2 Módulo 3, ADI-R, evaluación cognitiva, del lenguaje y de conducta adaptativa."],["Pedir evaluación especializada completa lo antes posible: ADOS-2 Módulo 3, ADI-R, evaluación cognitiva, del lenguaje y de conducta adaptativa."]];
+function report(){const R=calc(),P=S.p,nom=P.nm||"el niño/la niña",h=new Date().toLocaleDateString("es-BO",{day:"numeric",month:"long",year:"numeric"});
+const bar=p=>`<div class="bar" style="margin:0;min-width:80px"><i style="width:${p}%"></i></div>`;
+const prio=PR[R.pr],hi=R.pr>=3;
+let apoyo=R.pr>=3&&R.fl>=1?"Intervención coordinada (terapia de lenguaje pragmático, habilidades sociales, apoyo psicológico y adaptaciones escolares), a confirmar tras la evaluación.":R.pr>=2?"Apoyo en habilidades sociales y lenguaje pragmático, con seguimiento escolar.":"Seguimiento y orientación a la familia y a la escuela.";
+const alertas=R.al.length?`<div class="note"><b>Señales de alerta que requieren consulta sin esperar:</b><ul>${R.al.map(a=>`<li>${a}</li>`).join("")}</ul>${S.al.des||R.al.some(a=>a.startsWith("Indicadores"))?"Si hay ideas de desaparecer o de hacerse daño, acuda hoy a un servicio de salud mental infantil o a urgencias.":""}</div>`:"";
+app.innerHTML=`<div id="rep"><h1>Informe de orientación clínica y psicológica</h1><p class="mut">Fecha: ${h} · Paciente: ${nom}${P.ed?" · "+P.ed+" años":""} · ${P.sx} · Responde: ${P.rs}</p>
+<div class="note"><b>Alcance.</b> Informe automático de orientación elaborado a partir de las respuestas de un cuidador. No constituye diagnóstico, no equivale al ADOS-2 ni al ADI-R y no está estandarizado. Su finalidad es organizar la información y orientar la consulta con un especialista.</div>
+<h2>1. Motivo y datos generales</h2><div class="card"><p>${P.mo||"No se indicó motivo específico de consulta."}</p></div>
+<h2>2. Resultados por área</h2><div class="card tw"><table><tr><th>Área</th><th>Puntaje</th><th>%</th><th></th><th>Nivel</th></tr>${AREAS.map(a=>{const r=R.ar[a.k];return `<tr><td>${a.k}. ${a.n}</td><td>${r.s}/${r.m}</td><td>${r.p}%</td><td>${bar(r.p)}</td><td>${LV[r.l]}</td></tr>`}).join("")}</table></div>
+<h2>3. Índices compuestos</h2><div class="card tw"><table><tr><th>Índice</th><th>Puntaje</th><th>%</th><th>Nivel</th></tr>
+<tr><td>Comunicación social (A+B+C)</td><td>${R.ix.CS.s}/${R.ix.CS.m}</td><td>${R.ix.CS.p}%</td><td>${LV[R.ix.CS.l]}</td></tr>
+<tr><td>Conductas repetitivas y sensoriales (D+E)</td><td>${R.ix.CR.s}/${R.ix.CR.m}</td><td>${R.ix.CR.p}%</td><td>${LV[R.ix.CR.l]}</td></tr>
+<tr><td>Dificultades asociadas (F)</td><td>${R.ix.DA.s}/${R.ix.DA.m}</td><td>${R.ix.DA.p}%</td><td>${LV[R.ix.DA.l]}</td></tr></table>
+<p class="mut">Los índices de comunicación social y conductas repetitivas corresponden a los dos dominios del DSM-5.</p></div>
+<h2>4. Impresión clínica de orientación</h2><div class="card">
+<p>Prioridad de evaluación especializada: <span class="pill ${hi?"h":""}">${prio}</span> · Impacto funcional: <span class="pill ${R.fl===2?"h":""}">${["bajo","moderado","alto"][R.fl]}</span> (ítems 62 y 63 = ${R.fn}/6)</p>
+<p>${nom[0].toUpperCase()+nom.slice(1)} presenta ${LV[R.ix.CS.l]} en comunicación social (${R.ix.CS.p}%) y ${LV[R.ix.CR.l]} en conductas repetitivas y sensoriales (${R.ix.CR.p}%). ${R.pr>=4?"Este perfil, con compromiso simultáneo de ambos dominios, es coherente con lo que suele motivar una evaluación diagnóstica de trastorno del espectro autista.":R.pr>=2?"Este perfil justifica una valoración especializada para precisar su origen.":"El perfil no muestra, por ahora, un patrón que justifique evaluación urgente."} Solo la evaluación presencial puede confirmar o descartar el diagnóstico y, de confirmarse, el nivel de apoyo (1, 2 o 3).</p>
+${R.mask?`<p><b>Consideración clínica:</b> ${S.al.mask?"el patrón «bien afuera, explota en casa» sugiere posible enmascaramiento, frecuente en niñas y en niños con lenguaje fluido; puede haber más dificultad de la que muestra el puntaje. ":""}${S.al.aud?"Conviene descartar problemas auditivos y visuales antes de interpretar los resultados.":""}</p>`:""}</div>
+${alertas}
+<h2>5. Informe psicológico descriptivo</h2><div class="card">${AREAS.map(a=>`<p><b>${a.n}.</b> ${TX[a.k][R.ar[a.k].l]}</p>`).join("")}
+${R.hi.length?`<h3>Conductas con máxima frecuencia (puntaje 3)</h3><ul>${R.hi.slice(0,12).map(q=>`<li>${q.i}. ${q.t}</li>`).join("")}</ul>${R.hi.length>12?`<p class="mut">y ${R.hi.length-12} más.</p>`:""}`:""}</div>
+<h2>6. Recomendaciones</h2><div class="card"><ul><li>${REC[R.pr][0]}</li><li>Apoyo que suele plantearse con este perfil: ${apoyo}</li><li>Pedir evaluación de audición y visión si no se hizo.</li><li>Compartir este informe con un segundo observador (padre, docente) y comparar respuestas.</li><li>Grabar videos cortos de las conductas que preocupan y llevarlos a la consulta.</li><li>No esperar el diagnóstico para iniciar apoyos de lenguaje y habilidades sociales.</li></ul>${P.ob?`<p><b>Observaciones de la familia:</b> ${P.ob}</p>`:""}</div>
+<h2>7. Límites</h2><p class="mut">Un puntaje alto no confirma autismo y uno bajo no lo descarta. TDAH, ansiedad, trastornos del lenguaje, trauma o sordera pueden elevar el puntaje. Los cortes por porcentaje son aproximados y no están validados. Instrumentos con validez para cribado: SCQ, SRS-2, CAST y AQ-Child.</p></div>
+<div class="nav no"><button class="btn s" id="rs">Empezar de nuevo</button><button class="btn" id="pr">Imprimir o guardar PDF</button></div>`;
+$("#pr").onclick=()=>window.print();$("#rs").onclick=()=>{S.step=0;S.a={};S.al={};S.p={};render()};scrollTo(0,0)}
+function render(){if(S.step===0)intro();else if(S.step<=6)pregs();else if(S.step===7)extra();else report();scrollTo(0,0)}
+render();
+</script></body></html>
